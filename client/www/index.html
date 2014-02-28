@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LoopBack AngularJS SDK Todo Example</title>
+        <style>
+            body{
+                font-size:16px;
+                font-family:"Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+            }
+            header h1 {
+                font-size:130%;
+                font-weight:500;
+                color:#444444;
+            }
+            ul {
+                list-style: none;
+            }
+            button.link-cmd {
+                color:red;
+                border:0;
+                background-color: transparent;
+            }
+        </style>
+    </head>
+    <body ng-app="app">
+
+        <header><h1>LoopBack Todo Example</h1></header>
+
+        <div class="container" ng-controller="TodoController">
+
+            <!-- first time greeting message -->
+            <p ng-hide="todos.length">You don't have any todos. Add one now:</p>
+
+            <!-- list of todos -->
+            <ul id="todos">
+                <li ng-repeat="todo in todos">
+                    <label>
+                        <input type="checkbox" ng-model="todo.completed" ng-change="setCompleted(todo)" />
+                        {{todo.title}}
+                    </label>
+                    <button class="link-cmd" ng-click="deleteTodo(todo)">(x)</button>
+                </li>
+            </ul>
+
+            <!-- add todo form -->
+            <form name="AddTodoForm">
+                <input ng-model="newTodo.title" name="TodoTitle" type="text" required />
+                <input type="button" ng-click="addNewTodo(newTodo)" ng-disabled="AddTodoForm.TodoTitle.$invalid" value="Add todo">
+            </form>
+
+        </div>
+
+        <script src="./vendor/angular.js"></script>
+        <script src="./vendor/angular-resource.js"></script>
+        <script src="./lb-services.js"></script>
+        <script src="./app.js"></script>
+    </body>
+</html>
